@@ -16,9 +16,13 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
+import os
+
 app = Flask(__name__)
 app.config['DEBUG'] = False
 CORS(app)
+
+port = int(os.getenv('PORT', 8090))
 
 @app.route('/postreq', methods = ['POST'])
 def covidCommSpreadPredReq():
@@ -70,4 +74,4 @@ def covidCommSpreadPredReq():
     else:
         return jsonify('Empty Request')
     
-app.run(host='127.0.0.1', port= 8090)
+app.run(host='0.0.0.0', port= port)
